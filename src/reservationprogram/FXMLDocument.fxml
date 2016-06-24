@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reservationprogram.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="544.0" prefWidth="425.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="reservationprogram.FXMLDocumentController">
     <children>
-        <Button layoutX="126" layoutY="90" text="Click Me!" onAction="#handleButtonAction" fx:id="button" />
-        <Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" fx:id="label" />
+        <Button fx:id="button" layoutX="126.0" layoutY="95.0" onAction="#handleButtonAction" text="Delete" />
+        <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
+      <Button layoutX="80.0" layoutY="95.0" mnemonicParsing="false" text="Insert" />
+      <Button layoutX="177.0" layoutY="95.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="46.0" text="Edit" />
+      <Button layoutX="223.0" layoutY="95.0" mnemonicParsing="false" text="Refresh" />
     </children>
 </AnchorPane>
