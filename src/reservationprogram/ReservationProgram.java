@@ -5,6 +5,7 @@
  */
 package reservationprogram;
 
+import java.sql.Date;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,8 +23,11 @@ public class ReservationProgram extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
 
         Scene scene = new Scene(root);
+        
+        ReservInfo info = new ReservInfo("Jack Poo", 1, new Date(2015,1,1), new Date(2015,1,7));
         SQLHelper help = new SQLHelper();
-        help.insert();
+        help.insert(info);
+        
         stage.setScene(scene);
         stage.show();
     }

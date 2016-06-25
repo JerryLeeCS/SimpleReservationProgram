@@ -18,20 +18,25 @@ import java.sql.SQLException;
 public class SQLHelper {
 
     private static Connection connection = null;
-
+           private static final String dbURL = "jdbc:derby://localhost:1527/RESERVATION_DB";
+           private static final String user = "administrator";
+           private static final String pass = "1234";
     public SQLHelper() {
 
     }
 
-    public void insert() {
+    public void insert(ReservInfo info) {
         PreparedStatement stmt = null;
         getConnection();
         try{
         String query = "INSERT INTO ADMINISTRATOR.RESERVATION_TABLE " +
-                "VALUES (?)";
+                "VALUES (?,?,?,?)";
         stmt = connection.prepareStatement(query);
         
-        stmt.setString(1, "Jerry");
+        stmt.setString(1, info.getName());
+        stmt.setInt(2, info.getRoomType());
+        stmt.setDate(3, info.getCheckinDate());
+        stmt.setDate(4, info.getCheckoutDate());
         
         stmt.executeUpdate();
         connection.commit();
@@ -41,16 +46,19 @@ public class SQLHelper {
             e.printStackTrace();
         }
     }
+    //delete method
+    //edit method
+    //refresh list 
+    
 
     private void getConnection() {
         try {
-            String dbURL = "jdbc:derby://localhost:1527/RESERVATION_DB";
-            String user = "administrator";
-            String pass = "1234";
+
             connection = DriverManager.getConnection(dbURL,user,pass);
             if (connection != null) {
                 System.out.println("Successful connected to database");
             }
+            connection.setAutoCommit(false);
         } catch (SQLException e) {
             e.printStackTrace();
         }
