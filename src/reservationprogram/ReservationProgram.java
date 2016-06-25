@@ -16,13 +16,14 @@ import javafx.stage.Stage;
  * @author gaming
  */
 public class ReservationProgram extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-        
+
         Scene scene = new Scene(root);
-        
+        SQLHelper help = new SQLHelper();
+        help.insert();
         stage.setScene(scene);
         stage.show();
     }
@@ -32,6 +33,7 @@ public class ReservationProgram extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+
     }
-    
+
 }
