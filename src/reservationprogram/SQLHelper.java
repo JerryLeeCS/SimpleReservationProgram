@@ -6,10 +6,13 @@
 package reservationprogram;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
+import javafx.scene.control.TableColumn;
 
 /**
  *
@@ -19,6 +22,7 @@ public class SQLHelper {
 
     private static Connection connection = null;
            private static final String dbURL = "jdbc:derby://localhost:1527/RESERVATION_DB";
+           private static final String dbName ="ADMINISTRATOR.RESERVATION_TABLE";
            private static final String user = "administrator";
            private static final String pass = "1234";
     public SQLHelper() {
@@ -29,8 +33,8 @@ public class SQLHelper {
         PreparedStatement stmt = null;
         getConnection();
         try{
-        String query = "INSERT INTO ADMINISTRATOR.RESERVATION_TABLE " +
-                "VALUES (?,?,?,?)";
+        String query = "INSERT INTO " + dbName +
+                " VALUES (?,?,?,?)";
         stmt = connection.prepareStatement(query);
         
         stmt.setString(1, info.getName());
@@ -49,11 +53,29 @@ public class SQLHelper {
     //delete method
     //edit method
     //refresh list 
-    
+    public void showDatabaseTable()throws SQLException{
+        getConnection();
+        Statement stmt = null;
+        String query = "SELECT * FROM " + dbName;
+        
+        try{
+            stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()){
+                System.out.println("Name: " + rs.getString("NAME") + " ROOM TYPE: " + rs.getInt("ROOM_TYPE") + " CHECKIN: "+ rs.getDate("CHECKIN_DATE") + "CHECKOUT: "+ rs.getDate("CHECKOUT_DATE"));
+                
+            }
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            if(stmt!=null) stmt.close();
+            connection.close();
+        }
+    }
 
     private void getConnection() {
         try {
-
             connection = DriverManager.getConnection(dbURL,user,pass);
             if (connection != null) {
                 System.out.println("Successful connected to database");
@@ -64,4 +86,11 @@ public class SQLHelper {
         }
     }
 
+    public ResultSet getSelectAllResultSet()throws SQLException{
+        getConnection();
+        String query = "SELECT * FROM " + dbName;
+        ResultSet rs = connection.createStatement().executeQuery(query);
+        connection.close();
+        return rs;
+    }
 }
