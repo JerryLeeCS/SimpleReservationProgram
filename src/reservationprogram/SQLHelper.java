@@ -9,10 +9,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javafx.scene.control.TableColumn;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -53,17 +53,16 @@ public class SQLHelper {
     //delete method
     //edit method
     //refresh list 
-    public void showDatabaseTable()throws SQLException{
+    public List<ReservInfo> getListOfReservation()throws SQLException{
         getConnection();
         Statement stmt = null;
         String query = "SELECT * FROM " + dbName;
-        
+        List<ReservInfo> list = new ArrayList<>();
         try{
             stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while(rs.next()){
-                System.out.println("Name: " + rs.getString("NAME") + " ROOM TYPE: " + rs.getInt("ROOM_TYPE") + " CHECKIN: "+ rs.getDate("CHECKIN_DATE") + "CHECKOUT: "+ rs.getDate("CHECKOUT_DATE"));
-                
+                list.add(new ReservInfo(rs.getString("NAME"), rs.getInt("ROOM_TYPE"), rs.getDate("CHECKIN_DATE"), rs.getDate("CHECKOUT_DATE")));
             }
             
         }catch(SQLException e){
@@ -71,6 +70,7 @@ public class SQLHelper {
         }finally{
             if(stmt!=null) stmt.close();
             connection.close();
+            return list;
         }
     }
 
@@ -80,17 +80,10 @@ public class SQLHelper {
             if (connection != null) {
                 System.out.println("Successful connected to database");
             }
-            connection.setAutoCommit(false);
+            //connection.setAutoCommit(false);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public ResultSet getSelectAllResultSet()throws SQLException{
-        getConnection();
-        String query = "SELECT * FROM " + dbName;
-        ResultSet rs = connection.createStatement().executeQuery(query);
-        connection.close();
-        return rs;
-    }
 }

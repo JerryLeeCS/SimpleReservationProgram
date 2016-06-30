@@ -6,6 +6,8 @@
 package reservationprogram;
 
 import java.sql.Date;
+import javafx.beans.property.*;
+
 
 /**
  *
@@ -22,6 +24,10 @@ public class ReservInfo {
         this.RoomType = RoomType;
         this.checkinDate = checkinDate;
         this.checkoutDate = checkoutDate;
+    }
+    
+    public void setName(String name){
+        Name = name;
     }
     
     public String getName(){
