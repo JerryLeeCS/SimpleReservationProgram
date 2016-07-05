@@ -7,42 +7,76 @@ package reservationprogram;
 
 import java.sql.Date;
 import javafx.beans.property.*;
-
+import javafx.beans.property.adapter.JavaBeanObjectProperty;
 
 /**
  *
  * @author gaming
  */
 public class ReservInfo {
-    private String Name;
-    private int RoomType;
-    private Date checkinDate;
-    private Date checkoutDate;
-    
-    public ReservInfo(String Name, int RoomType, Date checkinDate, Date checkoutDate){
-        this.Name = Name;
-        this.RoomType = RoomType;
-        this.checkinDate = checkinDate;
-        this.checkoutDate = checkoutDate;
+
+    private StringProperty Name;
+    private StringProperty RoomType;
+    private StringProperty checkinDate;
+    private StringProperty checkoutDate;
+
+    public void setName(String value) {
+        nameProperty().set(value);
     }
-    
-    public void setName(String name){
-        Name = name;
+
+    public void setRoomType(String value) {
+        roomTypeProperty().set(value);
     }
-    
-    public String getName(){
+
+    public void setCheckinDate(String value) {
+        checkinDateProperty().set(value);
+    }
+
+    public void setCheckoutDate(String value) {
+        checkinDateProperty().set(value);
+    }
+
+    public String getName() {
+        return nameProperty().get();
+    }
+
+    public String getRoomType() {
+        return roomTypeProperty().get();
+    }
+
+    public String getCheckinDate() {
+        return checkinDateProperty().get();
+    }
+
+    public String getCheckoutDate() {
+        return checkinDateProperty().get();
+    }
+
+    public StringProperty nameProperty() {
+        if (Name == null) {
+            Name = new SimpleStringProperty(this, "Name");
+        }
         return Name;
     }
-    
-    public int getRoomType(){
+
+    public StringProperty roomTypeProperty() {
+        if (RoomType == null) {
+            RoomType = new SimpleStringProperty(this, "RoomType");
+        }
         return RoomType;
     }
-    
-    public Date getCheckinDate(){
+
+    public StringProperty checkinDateProperty() {
+        if (checkinDate == null) {
+            checkinDate = new SimpleStringProperty(this, "checkinDate");
+        }
         return checkinDate;
     }
-    
-    public Date getCheckoutDate(){
+
+    public StringProperty checkoutDateProperty() {
+        if (checkoutDate == null) {
+            checkoutDate = new SimpleStringProperty(this, "checkoutDate");
+        }
         return checkoutDate;
     }
 }

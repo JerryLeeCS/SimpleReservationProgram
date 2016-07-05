@@ -1,50 +1,82 @@
 package reservationprogram;
 
-
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TreeTableColumn;
-import javafx.util.Callback;
-import reservationprogram.SQLHelper;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author gaming
  */
 public class DynamicTable {
-    
-    @FXML
-    private TableView<ObservableList> reservationTable;
 
-    public DynamicTable() throws SQLException{
+    private TableView<ObservableList<String>> table;
+
+    public DynamicTable() {
+
     }
-    
-   /* public  void showTable() throws SQLException{
-        ObservableList<ObservableList> data = FXCollections.observableArrayList();
+
+    public TableView showTable() {
         SQLHelper helper = new SQLHelper();
-        ResultSet rs = helper.getSelectAllResultSet();
-        
-        while(rs.next()){
-             ObservableList<String> row = FXCollections.observableArrayList();
-                for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++){
-                    row.add(rs.getString(i));
-                }
-                System.out.println("Row [1] added "+row );
-                data.add(row);
+        List list;
+        try {
+            list = new ArrayList(helper.getListOfReservation());
+            ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
+            ListIterator li = list.listIterator();
+            while (li.hasNext()) {
+                ReservInfo info = (ReservInfo) li.next();
+                ObservableList<String> l = FXCollections.observableArrayList();
+                l.add(info.getName());
+                l.add(info.getRoomType());
+                l.add(info.getCheckinDate());
+                l.add(info.getCheckoutDate());
+
+                System.out.println("Row added" + l);
+                data.add(l);
+            }
+
+            //table.setItems(data);
+            return table;
+        } catch (SQLException ex) {
+            Logger.getLogger(DynamicTable.class.getName()).log(Level.SEVERE, null, ex);
         }
-        reservationTable.setItems(data);
-    }*/
+        return null;
+    }
+
+    public void knowTable() throws SQLException {
+        SQLHelper helper = new SQLHelper();
+        List list = new ArrayList(helper.getListOfReservation());
+        ListIterator li = list.listIterator();
+        while (li.hasNext()) {
+            ReservInfo info = (ReservInfo) li.next();
+            System.out.println("Name: " + info.getName() + " Room type: " + info.getRoomType());
+        }
+    }
+
+    public void setTable() {
+        ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
+        ObservableList<String> l = FXCollections.observableArrayList();
+        l.add("Jerry");
+        l.add("Lee");
+        ObservableList<String> l1 = FXCollections.observableArrayList();
+        l1.add("Jessy");
+        l1.add("Lee");
+        
+        data.add(l);
+        data.add(l1);
+        
+        table.setItems(data);
+    }
 }

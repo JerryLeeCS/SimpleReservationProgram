@@ -34,6 +34,8 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private void handleRefreshButtonAction(ActionEvent event) throws SQLException{
+        DynamicTable table = new DynamicTable();
+        table.setTable();
         
     }
     

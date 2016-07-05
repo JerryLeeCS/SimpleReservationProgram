@@ -6,7 +6,6 @@
 package reservationprogram;
 
 import java.io.IOException;
-import java.sql.Date;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,7 +23,7 @@ public class ReservationProgram extends Application {
     private static Stage newStage;
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) throws Exception {   
         primaryStage = stage;
         setNewStage();
         setPrimaryStage();
@@ -39,14 +38,14 @@ public class ReservationProgram extends Application {
     }
 
     private void setPrimaryStage() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = (Parent)FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("RESERVATION PROGRAM");
     }
 
     private void setNewStage() throws IOException {
-        Parent popRoot = FXMLLoader.load(getClass().getResource("ReservationForm.fxml"));
+        Parent popRoot = (Parent)FXMLLoader.load(getClass().getResource("ReservationForm.fxml"));
         Scene popScene = new Scene(popRoot);
         newStage = new Stage();
         newStage.setScene(popScene);

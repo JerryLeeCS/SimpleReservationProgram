@@ -38,9 +38,9 @@ public class SQLHelper {
         stmt = connection.prepareStatement(query);
         
         stmt.setString(1, info.getName());
-        stmt.setInt(2, info.getRoomType());
-        stmt.setDate(3, info.getCheckinDate());
-        stmt.setDate(4, info.getCheckoutDate());
+        stmt.setString(2, info.getRoomType());
+        stmt.setString(3, info.getCheckinDate());
+        stmt.setString(4, info.getCheckoutDate());
         
         stmt.executeUpdate();
         connection.commit();
@@ -62,7 +62,12 @@ public class SQLHelper {
             stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while(rs.next()){
-                list.add(new ReservInfo(rs.getString("NAME"), rs.getInt("ROOM_TYPE"), rs.getDate("CHECKIN_DATE"), rs.getDate("CHECKOUT_DATE")));
+                ReservInfo info = new ReservInfo();
+                info.setName(rs.getString("NAME"));
+                info.setRoomType("ROOM_TYPE");
+                info.setCheckinDate("CHECKIN_DATE");
+                info.setCheckoutDate("CHECKOUT_DATE");
+                list.add(info);
             }
             
         }catch(SQLException e){

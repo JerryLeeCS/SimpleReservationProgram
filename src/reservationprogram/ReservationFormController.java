@@ -36,7 +36,11 @@ public class ReservationFormController implements Initializable {
     
     @FXML 
     private void handleSubmitButtonEvent(ActionEvent event){
-        ReservInfo info = new ReservInfo(nameField.getText(), Integer.parseInt(roomTypeField.getText()), Date.valueOf(checkinField.getValue()), Date.valueOf(checkoutField.getValue()));
+        ReservInfo info = new ReservInfo();
+        info.setName(nameField.getText());
+        info.setRoomType(roomTypeField.getText());
+        info.setCheckinDate(checkinField.getValue().toString());
+        info.setCheckoutDate(checkoutField.getValue().toString());
         SQLHelper helper = new SQLHelper();
         helper.insert(info);
         Stage stage = (Stage) nameField.getScene().getWindow();
