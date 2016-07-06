@@ -42,6 +42,8 @@ public class SQLHelper {
         stmt.setString(3, info.getCheckinDate());
         stmt.setString(4, info.getCheckoutDate());
         
+            System.err.println("Info inserted: " + info.getName() + " " + info.getRoomType() + " " + info.getCheckinDate() + " " + info.getCheckoutDate());
+        
         stmt.executeUpdate();
         connection.commit();
         stmt.close();
@@ -64,9 +66,10 @@ public class SQLHelper {
             while(rs.next()){
                 ReservInfo info = new ReservInfo();
                 info.setName(rs.getString("NAME"));
-                info.setRoomType("ROOM_TYPE");
-                info.setCheckinDate("CHECKIN_DATE");
-                info.setCheckoutDate("CHECKOUT_DATE");
+                info.setRoomType(rs.getString("ROOM_TYPE"));
+                info.setCheckinDate(rs.getString("CHECKIN_DATE"));
+                info.setCheckoutDate(rs.getString("CHECKOUT_DATE"));
+                System.out.println("getListOfReservation: " + info.getName() + " " + info.getRoomType() + " " + info.getCheckinDate() + " " + info.getCheckoutDate());
                 list.add(info);
             }
             

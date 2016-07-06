@@ -8,7 +8,6 @@ package reservationprogram;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -25,7 +24,7 @@ public class FXMLDocumentController implements Initializable {
     private Button insertButton;
     
     @FXML
-    private TableView<ObservableList<ObservableList>> reservationTable;
+    private TableView<ReservInfo> reservationTable;
     
     @FXML
     private void handleSubmitButtonAction(ActionEvent event) {
@@ -35,13 +34,17 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleRefreshButtonAction(ActionEvent event) throws SQLException{
         DynamicTable table = new DynamicTable();
-        table.setTable();
+
         
     }
     
-    @Override
+    @Override @FXML
     public void initialize(URL url, ResourceBundle rb)  {
-
+    DynamicTable tableHelper = new DynamicTable();
+    reservationTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    reservationTable.getColumns().setAll(tableHelper.getNameCol(), tableHelper.getRoomTypeCol(),tableHelper.getCheckinDateCol(),tableHelper.getCheckoutDateCol());
+    reservationTable.setItems(tableHelper.getData());
+   
 }
  
     

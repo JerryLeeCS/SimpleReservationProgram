@@ -9,7 +9,9 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,38 +23,65 @@ import javafx.scene.control.TableView;
  * @author gaming
  */
 public class DynamicTable {
-
-    private TableView<ObservableList<String>> table;
+    
+    @FXML
+    private TableView<ReservInfo> table;
 
     public DynamicTable() {
-
+        table = new TableView<ReservInfo>();
     }
 
-    public TableView showTable() {
+    public ObservableList<ReservInfo> getData() {
         SQLHelper helper = new SQLHelper();
         List list;
         try {
             list = new ArrayList(helper.getListOfReservation());
-            ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
+            ObservableList<ReservInfo> data = FXCollections.observableArrayList();
             ListIterator li = list.listIterator();
             while (li.hasNext()) {
                 ReservInfo info = (ReservInfo) li.next();
-                ObservableList<String> l = FXCollections.observableArrayList();
-                l.add(info.getName());
-                l.add(info.getRoomType());
-                l.add(info.getCheckinDate());
-                l.add(info.getCheckoutDate());
 
-                System.out.println("Row added" + l);
-                data.add(l);
+                System.out.println("Row added" + info.getName()+ " " + info.getRoomType() + " " + info.getCheckinDate() + " " + info.getCheckoutDate());
+                data.add(info);
             }
 
             //table.setItems(data);
-            return table;
+
+            //table.getColumns().setAll(getNameCol(), getRoomTypeCol(), getCheckinDateCol(), getCheckoutDateCol());
+           
+            return data;
         } catch (SQLException ex) {
             Logger.getLogger(DynamicTable.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public TableColumn<ReservInfo, String> getNameCol() {
+        TableColumn<ReservInfo, String> nameCol = new TableColumn<>("Name");
+        nameCol.setCellValueFactory(new PropertyValueFactory("Name"));
+        System.out.println("returned NameCol");
+        return nameCol;
+    }
+
+    public TableColumn<ReservInfo, String> getRoomTypeCol() {
+        TableColumn<ReservInfo, String> roomTypeCol = new TableColumn<>("Room Type");
+        roomTypeCol.setCellValueFactory(new PropertyValueFactory("RoomType"));
+        System.out.println("returned RoomTypeCol");
+        return roomTypeCol;
+    }
+
+    public TableColumn<ReservInfo, String> getCheckinDateCol() {
+        TableColumn<ReservInfo, String> checkinDateCol = new TableColumn<>("Checkin Date");
+        checkinDateCol.setCellValueFactory(new PropertyValueFactory("checkinDate"));
+        System.out.println("returned CheckinDateCol");
+        return checkinDateCol;
+    }
+
+    public TableColumn<ReservInfo, String> getCheckoutDateCol() {
+        TableColumn<ReservInfo, String> checkoutDateCol = new TableColumn<>("Checkout Date");
+        checkoutDateCol.setCellValueFactory(new PropertyValueFactory("checkoutDate"));
+        System.out.println("returned CheckoutDateCol");
+        return checkoutDateCol;
     }
 
     public void knowTable() throws SQLException {
@@ -65,18 +94,4 @@ public class DynamicTable {
         }
     }
 
-    public void setTable() {
-        ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
-        ObservableList<String> l = FXCollections.observableArrayList();
-        l.add("Jerry");
-        l.add("Lee");
-        ObservableList<String> l1 = FXCollections.observableArrayList();
-        l1.add("Jessy");
-        l1.add("Lee");
-        
-        data.add(l);
-        data.add(l1);
-        
-        table.setItems(data);
-    }
 }

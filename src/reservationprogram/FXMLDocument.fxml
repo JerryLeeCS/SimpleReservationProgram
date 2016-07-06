@@ -13,16 +13,8 @@
       <Button fx:id="deleteButton" layoutX="135.0" layoutY="95.0" text="Delete" />
       <Button layoutX="213.0" layoutY="95.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="46.0" text="Edit" />
       <Button fx:id="refreshButton" layoutX="283.0" layoutY="95.0" mnemonicParsing="false" onAction="#handleRefreshButtonAction" text="Refresh" />
-      <TableView layoutY="120.0" prefHeight="425.0" prefWidth="425.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="NAME" />
-          <TableColumn prefWidth="75.0" text="ROOM TYPE" />
-            <TableColumn prefWidth="75.0" text="CHECK IN DATE" />
-            <TableColumn prefWidth="75.0" text="CHECK OUT DATE" />
-        </columns>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
+      <TableView fx:id="reservationTable" layoutY="120.0" prefHeight="425.0" prefWidth="425.0">
+
       </TableView>
     </children>
 </AnchorPane>

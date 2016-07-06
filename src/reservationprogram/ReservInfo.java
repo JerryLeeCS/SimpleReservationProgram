@@ -33,7 +33,7 @@ public class ReservInfo {
     }
 
     public void setCheckoutDate(String value) {
-        checkinDateProperty().set(value);
+        checkoutDateProperty().set(value);
     }
 
     public String getName() {
@@ -49,7 +49,7 @@ public class ReservInfo {
     }
 
     public String getCheckoutDate() {
-        return checkinDateProperty().get();
+        return checkoutDateProperty().get();
     }
 
     public StringProperty nameProperty() {
