@@ -21,10 +21,11 @@ import java.util.List;
 public class SQLHelper {
 
     private static Connection connection = null;
-           private static final String dbURL = "jdbc:derby://localhost:1527/RESERVATION_DB";
-           private static final String dbName ="ADMINISTRATOR.RESERVATION_TABLE";
-           private static final String user = "administrator";
-           private static final String pass = "1234";
+    private static final String dbURL = "jdbc:derby://localhost:1527/RESERBATION_DB";//jdbc:derby://localhost:1527/RESERVATION_DB
+    private static final String dbName = "ADMINISTRATOR.RESERVATION_TABLE";
+    private static final String user = "administrator";
+    private static final String pass = "1234";
+
     public SQLHelper() {
 
     }
@@ -32,38 +33,36 @@ public class SQLHelper {
     public void insert(ReservInfo info) {
         PreparedStatement stmt = null;
         getConnection();
-        try{
-        String query = "INSERT INTO " + dbName +
-                " VALUES (?,?,?,?)";
-        stmt = connection.prepareStatement(query);
-        
-        stmt.setString(1, info.getName());
-        stmt.setString(2, info.getRoomType());
-        stmt.setString(3, info.getCheckinDate());
-        stmt.setString(4, info.getCheckoutDate());
-        
+        try {
+            String query = "INSERT INTO " + dbName
+                    + " VALUES (?,?,?,?)";
+            stmt = connection.prepareStatement(query);
+
+            stmt.setString(1, info.getName());
+            stmt.setString(2, info.getRoomType());
+            stmt.setString(3, info.getCheckinDate());
+            stmt.setString(4, info.getCheckoutDate());
+
             System.err.println("Info inserted: " + info.getName() + " " + info.getRoomType() + " " + info.getCheckinDate() + " " + info.getCheckoutDate());
-        
-        stmt.executeUpdate();
-        connection.commit();
-        stmt.close();
-        connection.close();
-        }catch(SQLException e){
+
+            stmt.executeUpdate();
+            connection.commit();
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    //delete method
-    //edit method
-    //refresh list 
-    public List<ReservInfo> getListOfReservation()throws SQLException{
+
+    public List<ReservInfo> getListOfReservation() throws SQLException {
         getConnection();
         Statement stmt = null;
         String query = "SELECT * FROM " + dbName;
         List<ReservInfo> list = new ArrayList<>();
-        try{
+        try {
             stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            while(rs.next()){
+            while (rs.next()) {
                 ReservInfo info = new ReservInfo();
                 info.setName(rs.getString("NAME"));
                 info.setRoomType(rs.getString("ROOM_TYPE"));
@@ -72,11 +71,13 @@ public class SQLHelper {
                 System.out.println("getListOfReservation: " + info.getName() + " " + info.getRoomType() + " " + info.getCheckinDate() + " " + info.getCheckoutDate());
                 list.add(info);
             }
-            
-        }catch(SQLException e){
+
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
-            if(stmt!=null) stmt.close();
+        } finally {
+            if (stmt != null) {
+                stmt.close();
+            }
             connection.close();
             return list;
         }
@@ -84,7 +85,7 @@ public class SQLHelper {
 
     private void getConnection() {
         try {
-            connection = DriverManager.getConnection(dbURL,user,pass);
+            connection = DriverManager.getConnection(dbURL, user, pass);
             if (connection != null) {
                 System.out.println("Successful connected to database");
             }

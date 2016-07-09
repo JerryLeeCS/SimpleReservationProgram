@@ -24,11 +24,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class DynamicTable {
     
-    @FXML
-    private TableView<ReservInfo> table;
 
     public DynamicTable() {
-        table = new TableView<ReservInfo>();
+
     }
 
     public ObservableList<ReservInfo> getData() {
@@ -45,10 +43,7 @@ public class DynamicTable {
                 data.add(info);
             }
 
-            //table.setItems(data);
 
-            //table.getColumns().setAll(getNameCol(), getRoomTypeCol(), getCheckinDateCol(), getCheckoutDateCol());
-           
             return data;
         } catch (SQLException ex) {
             Logger.getLogger(DynamicTable.class.getName()).log(Level.SEVERE, null, ex);

@@ -19,36 +19,35 @@ import javafx.scene.control.TableView;
  * @author gaming
  */
 public class FXMLDocumentController implements Initializable {
-    
+
     @FXML
     private Button insertButton;
-    
+
     @FXML
     private TableView<ReservInfo> reservationTable;
-    
+
     @FXML
     private void handleSubmitButtonAction(ActionEvent event) {
         ReservationProgram.showPopupWindow();
+        showTable();
     }
-    
+
     @FXML
-    private void handleRefreshButtonAction(ActionEvent event) throws SQLException{
-        DynamicTable table = new DynamicTable();
-
-        
+    private void handleRefreshButtonAction(ActionEvent event) throws SQLException {
+        showTable();
     }
-    
-    @Override @FXML
-    public void initialize(URL url, ResourceBundle rb)  {
-    DynamicTable tableHelper = new DynamicTable();
-    reservationTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    reservationTable.getColumns().setAll(tableHelper.getNameCol(), tableHelper.getRoomTypeCol(),tableHelper.getCheckinDateCol(),tableHelper.getCheckoutDateCol());
-    reservationTable.setItems(tableHelper.getData());
-   
-}
- 
-    
-    
-}
-    
 
+    @Override
+    @FXML
+    public void initialize(URL url, ResourceBundle rb) {
+        showTable();
+    }
+
+    public void showTable() {
+        DynamicTable tableHelper = new DynamicTable();
+        reservationTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        reservationTable.getColumns().setAll(tableHelper.getNameCol(), tableHelper.getRoomTypeCol(), tableHelper.getCheckinDateCol(), tableHelper.getCheckoutDateCol());
+        reservationTable.setItems(tableHelper.getData());
+    }
+
+}
