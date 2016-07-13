@@ -20,12 +20,12 @@ import javafx.stage.Stage;
 public class ReservationProgram extends Application {
 
     private Stage primaryStage;
-    private static Stage newStage;
+    //private static Stage newStage;
 
     @Override
     public void start(Stage stage) throws Exception {   
         primaryStage = stage;
-        setNewStage();
+        //setNewStage();
         setPrimaryStage();
         primaryStage.show();
     }
@@ -44,6 +44,7 @@ public class ReservationProgram extends Application {
         primaryStage.setTitle("RESERVATION PROGRAM");
     }
 
+    /*
     private void setNewStage() throws IOException {
         Parent popRoot = (Parent)FXMLLoader.load(getClass().getResource("ReservationForm.fxml"));
         Scene popScene = new Scene(popRoot);
@@ -56,5 +57,5 @@ public class ReservationProgram extends Application {
     public static void showPopupWindow() {
         newStage.showAndWait();
     }
-
+*/
 }

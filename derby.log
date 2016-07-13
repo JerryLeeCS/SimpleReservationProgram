@@ -1,86 +1,13 @@
-Thu Jul 07 01:54:04 PDT 2016 Thread[JavaFX Application Thread,5,main] Cleanup action starting
-java.sql.SQLException: Database 'RESERVATION_DB' not found.
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.newSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.handleDBNotFound(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(Unknown Source)
-	at org.apache.derby.jdbc.InternalDriver.getNewEmbedConnection(Unknown Source)
-	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
-	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
-	at org.apache.derby.jdbc.AutoloadedDriver.connect(Unknown Source)
-	at java.sql.DriverManager.getConnection(DriverManager.java:664)
-	at java.sql.DriverManager.getConnection(DriverManager.java:247)
-	at reservationprogram.SQLHelper.getConnection(SQLHelper.java:87)
-	at reservationprogram.SQLHelper.getListOfReservation(SQLHelper.java:59)
-	at reservationprogram.DynamicTable.getData(DynamicTable.java:36)
-	at reservationprogram.FXMLDocumentController.showTable(FXMLDocumentController.java:50)
-	at reservationprogram.FXMLDocumentController.initialize(FXMLDocumentController.java:43)
-	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2548)
-	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2441)
-	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3214)
-	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3175)
-	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3148)
-	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3124)
-	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3104)
-	at javafx.fxml.FXMLLoader.load(FXMLLoader.java:3097)
-	at reservationprogram.ReservationProgram.setPrimaryStage(ReservationProgram.java:41)
-	at reservationprogram.ReservationProgram.start(ReservationProgram.java:29)
-	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$162(LauncherImpl.java:863)
-	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$175(PlatformImpl.java:326)
-	at com.sun.javafx.application.PlatformImpl.lambda$null$173(PlatformImpl.java:295)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at com.sun.javafx.application.PlatformImpl.lambda$runLater$174(PlatformImpl.java:294)
-	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
-	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
-	at com.sun.glass.ui.win.WinApplication.lambda$null$148(WinApplication.java:191)
-	at java.lang.Thread.run(Thread.java:745)
-Caused by: ERROR XJ004: Database 'RESERVATION_DB' not found.
-	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory.wrapArgsForTransportAcrossDRDA(Unknown Source)
-	... 37 more
-============= begin nested exception, level (1) ===========
-ERROR XJ004: Database 'RESERVATION_DB' not found.
-	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory.wrapArgsForTransportAcrossDRDA(Unknown Source)
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.newSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.handleDBNotFound(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(Unknown Source)
-	at org.apache.derby.jdbc.InternalDriver.getNewEmbedConnection(Unknown Source)
-	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
-	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
-	at org.apache.derby.jdbc.AutoloadedDriver.connect(Unknown Source)
-	at java.sql.DriverManager.getConnection(DriverManager.java:664)
-	at java.sql.DriverManager.getConnection(DriverManager.java:247)
-	at reservationprogram.SQLHelper.getConnection(SQLHelper.java:87)
-	at reservationprogram.SQLHelper.getListOfReservation(SQLHelper.java:59)
-	at reservationprogram.DynamicTable.getData(DynamicTable.java:36)
-	at reservationprogram.FXMLDocumentController.showTable(FXMLDocumentController.java:50)
-	at reservationprogram.FXMLDocumentController.initialize(FXMLDocumentController.java:43)
-	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2548)
-	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2441)
-	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3214)
-	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3175)
-	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3148)
-	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3124)
-	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3104)
-	at javafx.fxml.FXMLLoader.load(FXMLLoader.java:3097)
-	at reservationprogram.ReservationProgram.setPrimaryStage(ReservationProgram.java:41)
-	at reservationprogram.ReservationProgram.start(ReservationProgram.java:29)
-	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$162(LauncherImpl.java:863)
-	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$175(PlatformImpl.java:326)
-	at com.sun.javafx.application.PlatformImpl.lambda$null$173(PlatformImpl.java:295)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at com.sun.javafx.application.PlatformImpl.lambda$runLater$174(PlatformImpl.java:294)
-	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
-	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
-	at com.sun.glass.ui.win.WinApplication.lambda$null$148(WinApplication.java:191)
-	at java.lang.Thread.run(Thread.java:745)
-============= end nested exception, level (1) ===========
-Cleanup action completed
+----------------------------------------------------------------
+Wed Jul 13 01:13:37 PDT 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0155-e351-80f6-00000619eb18 
+on database directory C:\Users\gaming\Documents\NetBeansProjects\ReservationProgram\myDB with class loader sun.misc.Launcher$AppClassLoader@55f96302 
+Loaded from file:/C:/Users/gaming/Documents/NetBeansProjects/ReservationProgram/dist/run1274939360/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_91-b15
+user.dir=C:\Users\gaming\Documents\NetBeansProjects\ReservationProgram
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

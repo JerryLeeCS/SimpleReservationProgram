@@ -20,6 +20,8 @@ import javafx.scene.control.TableView;
  */
 public class FXMLDocumentController implements Initializable {
 
+    private DynamicTable tableHelper;
+
     @FXML
     private Button insertButton;
 
@@ -28,26 +30,34 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleSubmitButtonAction(ActionEvent event) {
-        ReservationProgram.showPopupWindow();
-        showTable();
+        ReservationForm form = new ReservationForm();
+        form.showPopupWindow(null);
+        tableHelper.setTable();
+    }
+
+    @FXML
+    private void handleDeleteButtonAction(ActionEvent event) {
+        tableHelper.deleteSelectedRow();
+        tableHelper.setTable();
+    }
+
+    @FXML
+    private void handleEditButtonAction(ActionEvent event) {
+        ReservationForm form = new ReservationForm();
+        form.showPopupWindow(tableHelper.getSelectedItem());
+        tableHelper.setTable();
     }
 
     @FXML
     private void handleRefreshButtonAction(ActionEvent event) throws SQLException {
-        showTable();
+        tableHelper.setTable();
     }
 
     @Override
     @FXML
     public void initialize(URL url, ResourceBundle rb) {
-        showTable();
-    }
-
-    public void showTable() {
-        DynamicTable tableHelper = new DynamicTable();
-        reservationTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        reservationTable.getColumns().setAll(tableHelper.getNameCol(), tableHelper.getRoomTypeCol(), tableHelper.getCheckinDateCol(), tableHelper.getCheckoutDateCol());
-        reservationTable.setItems(tableHelper.getData());
+        tableHelper = new DynamicTable(reservationTable);
+        tableHelper.setTable();
     }
 
 }

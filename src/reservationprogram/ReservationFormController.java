@@ -33,23 +33,59 @@ public class ReservationFormController implements Initializable {
     private DatePicker checkinField;
     @FXML
     private DatePicker checkoutField;
-    
-    @FXML 
-    private void handleSubmitButtonEvent(ActionEvent event){
-        ReservInfo info = new ReservInfo();
-        info.setName(nameField.getText());
-        info.setRoomType(roomTypeField.getText());
-        info.setCheckinDate(checkinField.getValue().toString());
-        info.setCheckoutDate(checkoutField.getValue().toString());
-        SQLHelper helper = new SQLHelper();
-        helper.insert(info);
+
+    private boolean edit = false;
+
+    private ReservInfo info;
+
+    @FXML
+    private void handleSubmitButtonEvent(ActionEvent event) {
+        if (edit) {
+            setInfo();
+            eraseFields();
+            SQLHelper helper = new SQLHelper();
+            helper.update(info);
+        } else {
+            info = new ReservInfo();
+            setInfo();
+            eraseFields();
+            SQLHelper helper = new SQLHelper();
+            helper.insert(info);
+
+        }
         Stage stage = (Stage) nameField.getScene().getWindow();
         stage.close();
     }
-    
+
+    private void setInfo() {
+        info.setName(nameField.getText());
+        info.setRoomType(roomTypeField.getText());
+        info.setCheckinDate(checkinField.getEditor().getText());
+        info.setCheckoutDate(checkoutField.getEditor().getText());
+    }
+
+    private void eraseFields() {
+        nameField.clear();
+        roomTypeField.clear();
+        checkinField.getEditor().clear();
+        checkoutField.getEditor().clear();
+
+    }
+
+    public void setForm(ReservInfo info) {//DATEPICKER has problems with the info's format of dates
+        nameField.setText(info.getName());
+        roomTypeField.setText(info.getRoomType());
+        checkinField.getEditor().setText(info.getCheckinDate());
+        checkoutField.getEditor().setText(info.getCheckoutDate());
+        edit = true;
+        this.info = info;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+        checkinField.setPromptText("MM/dd/yyyy");
+        checkoutField.setPromptText("MM/dd/yyyy");
+    }
+
 }

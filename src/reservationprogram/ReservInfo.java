@@ -19,7 +19,7 @@ public class ReservInfo {
     private StringProperty RoomType;
     private StringProperty checkinDate;
     private StringProperty checkoutDate;
-
+    private int ID;
     public void setName(String value) {
         nameProperty().set(value);
     }
@@ -34,6 +34,10 @@ public class ReservInfo {
 
     public void setCheckoutDate(String value) {
         checkoutDateProperty().set(value);
+    }
+    
+    public void setID(int ID){
+        this.ID = ID;
     }
 
     public String getName() {
@@ -50,6 +54,10 @@ public class ReservInfo {
 
     public String getCheckoutDate() {
         return checkoutDateProperty().get();
+    }
+    
+    public int getID(){
+        return ID;
     }
 
     public StringProperty nameProperty() {

@@ -23,26 +23,29 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * @author gaming
  */
 public class DynamicTable {
+
+    @FXML
+    private TableView<ReservInfo> reservationTable;//working
+
+    private SQLHelper databaseHelper = new SQLHelper();
     
-
-    public DynamicTable() {
-
+    public DynamicTable(TableView<ReservInfo> reservationTable) {
+        this.reservationTable = reservationTable;
+        this.reservationTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
-    public ObservableList<ReservInfo> getData() {
-        SQLHelper helper = new SQLHelper();
+    private ObservableList<ReservInfo> getData() {
         List list;
         try {
-            list = new ArrayList(helper.getListOfReservation());
+            list = new ArrayList(databaseHelper.getListOfReservation());
             ObservableList<ReservInfo> data = FXCollections.observableArrayList();
             ListIterator li = list.listIterator();
             while (li.hasNext()) {
                 ReservInfo info = (ReservInfo) li.next();
 
-                System.out.println("Row added" + info.getName()+ " " + info.getRoomType() + " " + info.getCheckinDate() + " " + info.getCheckoutDate());
+                System.out.println("Row added" + info.getName() + " " + info.getRoomType() + " " + info.getCheckinDate() + " " + info.getCheckoutDate());
                 data.add(info);
             }
-
 
             return data;
         } catch (SQLException ex) {
@@ -51,42 +54,50 @@ public class DynamicTable {
         return null;
     }
 
-    public TableColumn<ReservInfo, String> getNameCol() {
+    public void deleteSelectedRow() {
+        databaseHelper.deleteRow(getSelectedItem());
+    }
+
+    public void editSelectedRow(ReservInfo info) {
+        
+    }
+
+    public ReservInfo getSelectedItem() {
+        ReservInfo info = reservationTable.getSelectionModel().getSelectedItem();
+        return info;
+    }
+
+    private TableColumn<ReservInfo, String> getNameCol() {
         TableColumn<ReservInfo, String> nameCol = new TableColumn<>("Name");
         nameCol.setCellValueFactory(new PropertyValueFactory("Name"));
         System.out.println("returned NameCol");
         return nameCol;
     }
 
-    public TableColumn<ReservInfo, String> getRoomTypeCol() {
+    private TableColumn<ReservInfo, String> getRoomTypeCol() {
         TableColumn<ReservInfo, String> roomTypeCol = new TableColumn<>("Room Type");
         roomTypeCol.setCellValueFactory(new PropertyValueFactory("RoomType"));
         System.out.println("returned RoomTypeCol");
         return roomTypeCol;
     }
 
-    public TableColumn<ReservInfo, String> getCheckinDateCol() {
+    private TableColumn<ReservInfo, String> getCheckinDateCol() {
         TableColumn<ReservInfo, String> checkinDateCol = new TableColumn<>("Checkin Date");
         checkinDateCol.setCellValueFactory(new PropertyValueFactory("checkinDate"));
         System.out.println("returned CheckinDateCol");
         return checkinDateCol;
     }
 
-    public TableColumn<ReservInfo, String> getCheckoutDateCol() {
+    private TableColumn<ReservInfo, String> getCheckoutDateCol() {
         TableColumn<ReservInfo, String> checkoutDateCol = new TableColumn<>("Checkout Date");
         checkoutDateCol.setCellValueFactory(new PropertyValueFactory("checkoutDate"));
         System.out.println("returned CheckoutDateCol");
         return checkoutDateCol;
     }
 
-    public void knowTable() throws SQLException {
-        SQLHelper helper = new SQLHelper();
-        List list = new ArrayList(helper.getListOfReservation());
-        ListIterator li = list.listIterator();
-        while (li.hasNext()) {
-            ReservInfo info = (ReservInfo) li.next();
-            System.out.println("Name: " + info.getName() + " Room type: " + info.getRoomType());
-        }
+    public void setTable() {
+        reservationTable.getColumns().setAll(getNameCol(), getRoomTypeCol(), getCheckinDateCol(), getCheckoutDateCol());
+        reservationTable.setItems(getData());
     }
 
 }
