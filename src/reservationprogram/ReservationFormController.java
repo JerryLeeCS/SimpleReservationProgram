@@ -40,16 +40,15 @@ public class ReservationFormController implements Initializable {
 
     @FXML
     private void handleSubmitButtonEvent(ActionEvent event) {
+        SQLHelper helper = new SQLHelper();
         if (edit) {
             setInfo();
             eraseFields();
-            SQLHelper helper = new SQLHelper();
             helper.update(info);
         } else {
             info = new ReservInfo();
             setInfo();
             eraseFields();
-            SQLHelper helper = new SQLHelper();
             helper.insert(info);
 
         }

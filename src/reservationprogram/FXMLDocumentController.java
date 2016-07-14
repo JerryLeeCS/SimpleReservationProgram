@@ -43,9 +43,11 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleEditButtonAction(ActionEvent event) {
+        if(tableHelper.rowSelected()){
         ReservationForm form = new ReservationForm();
         form.showPopupWindow(tableHelper.getSelectedItem());
         tableHelper.setTable();
+        }
     }
 
     @FXML

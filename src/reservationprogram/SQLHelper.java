@@ -43,7 +43,6 @@ public class SQLHelper {
             System.err.println("Info inserted: " + info.getName() + " " + info.getRoomType() + " " + info.getCheckinDate() + " " + info.getCheckoutDate());
 
             stmt.executeUpdate();
-            connection.commit();
             stmt.close();
             connection.close();
         } catch (SQLException e) {
@@ -64,12 +63,13 @@ public class SQLHelper {
             stmt.setString(2, newInfo.getRoomType());
             stmt.setString(3, newInfo.getCheckinDate());
             stmt.setString(4,newInfo.getCheckoutDate());
-            stmt.setString(5, Integer.toString(newInfo.getID()));
+            stmt.setString(5, newInfo.getID());
             
             System.out.println("Update newInfo: " + newInfo.getName());
             
             stmt.executeUpdate();
             stmt.close();
+            connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(SQLHelper.class.getName()).log(Level.SEVERE, null, ex);
         }

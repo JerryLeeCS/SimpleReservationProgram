@@ -25,7 +25,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class DynamicTable {
 
     @FXML
-    private TableView<ReservInfo> reservationTable;//working
+    private TableView<ReservInfo> reservationTable;
 
     private SQLHelper databaseHelper = new SQLHelper();
     
@@ -58,8 +58,8 @@ public class DynamicTable {
         databaseHelper.deleteRow(getSelectedItem());
     }
 
-    public void editSelectedRow(ReservInfo info) {
-        
+    public boolean rowSelected(){
+        return !reservationTable.getSelectionModel().isEmpty();
     }
 
     public ReservInfo getSelectedItem() {

@@ -25,6 +25,7 @@ public class ReservationProgram extends Application {
     @Override
     public void start(Stage stage) throws Exception {   
         primaryStage = stage;
+        primaryStage.setResizable(false);
         //setNewStage();
         setPrimaryStage();
         primaryStage.show();
@@ -44,18 +45,4 @@ public class ReservationProgram extends Application {
         primaryStage.setTitle("RESERVATION PROGRAM");
     }
 
-    /*
-    private void setNewStage() throws IOException {
-        Parent popRoot = (Parent)FXMLLoader.load(getClass().getResource("ReservationForm.fxml"));
-        Scene popScene = new Scene(popRoot);
-        newStage = new Stage();
-        newStage.setScene(popScene);
-        newStage.initModality(Modality.APPLICATION_MODAL);
-        newStage.setTitle("RES FORM");
-    }
-
-    public static void showPopupWindow() {
-        newStage.showAndWait();
-    }
-*/
 }

@@ -56,8 +56,9 @@ public class ReservInfo {
         return checkoutDateProperty().get();
     }
     
-    public int getID(){
-        return ID;
+    
+    public String getID(){
+        return Integer.toString(ID);
     }
 
     public StringProperty nameProperty() {
