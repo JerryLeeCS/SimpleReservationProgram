@@ -97,7 +97,7 @@ public class SQLHelper {
     public List<ReservInfo> getListOfReservation() throws SQLException {
         getConnection();
         Statement stmt = null;
-        String query = "SELECT * FROM " + dbName;
+        String query = "SELECT * FROM " + dbName + " ORDER BY CHECKIN_DATE";
         List<ReservInfo> list = new ArrayList<>();
         try {
             stmt = connection.createStatement();
@@ -106,8 +106,8 @@ public class SQLHelper {
                 ReservInfo info = new ReservInfo();
                 info.setName(rs.getString("NAME"));
                 info.setRoomType(rs.getString("ROOM_TYPE"));
-                info.setCheckinDate(rs.getString("CHECKIN_DATE"));
-                info.setCheckoutDate(rs.getString("CHECKOUT_DATE"));
+                info.setCheckinDate(rs.getDate("CHECKIN_DATE").toString());
+                info.setCheckoutDate(rs.getDate("CHECKOUT_DATE").toString());
                 info.setID(rs.getInt("ID"));
                 System.out.println("reservationprogram.SQLHelper.getListOfReservation() " + rs.getInt("ID"));
                 list.add(info);
@@ -127,7 +127,7 @@ public class SQLHelper {
     private void createTable() {//MAKING
         getConnection();
         String createTable = "CREATE TABLE RESERVATION_TB (ID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (INCREMENT BY 1),NAME VARCHAR(30),"
-                + "ROOM_TYPE VARCHAR(15), CHECKIN_DATE VARCHAR(15), CHECKOUT_DATE VARCHAR(15), PRIMARY KEY (ID))";
+                + "ROOM_TYPE VARCHAR(15), CHECKIN_DATE DATE, CHECKOUT_DATE DATE, PRIMARY KEY (ID))";
 
         try {
             Statement statment = connection.createStatement();
