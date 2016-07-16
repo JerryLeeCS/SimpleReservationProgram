@@ -22,6 +22,10 @@ public class SQLHelper {
     private static final String dbName = "ADMINISTRATOR.RESERVATION_TB";
     private static final String user = "administrator";
     private static final String pass = "1234";
+    private static final String nameCol = "NAME";
+    private static final String roomtypeCol = "ROOM_TYPE";
+    private static final String checkinCol = "CHECKIN_DATE";
+    private static final String checkoutCol = "CHECKOUT_DATE";
 
     public SQLHelper() {
         createTable();
@@ -31,7 +35,7 @@ public class SQLHelper {
         PreparedStatement stmt = null;
         getConnection();
         try {
-            String query = "INSERT INTO " + dbName + "(NAME, ROOM_TYPE, CHECKIN_DATE, CHECKOUT_DATE)"
+            String query = "INSERT INTO " + dbName + "( "+nameCol+ ", " + roomtypeCol + ", " + checkinCol + ", " + checkoutCol + ")"
                     + " VALUES (?,?,?,?)";
             stmt = connection.prepareStatement(query);
 
@@ -54,7 +58,7 @@ public class SQLHelper {
         PreparedStatement stmt = null;
         getConnection();
         String query = "UPDATE " + dbName
-                + " SET NAME = ?, ROOM_TYPE = ?, CHECKIN_DATE = ?, CHECKOUT_DATE = ? "
+                + " SET " + nameCol +" = ?, " + roomtypeCol + " = ?, " + checkinCol + " = ?, " + checkoutCol + " = ? "
                 + "WHERE ID = ?";
         try {
             stmt = connection.prepareStatement(query);
@@ -104,10 +108,10 @@ public class SQLHelper {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 ReservInfo info = new ReservInfo();
-                info.setName(rs.getString("NAME"));
-                info.setRoomType(rs.getString("ROOM_TYPE"));
-                info.setCheckinDate(rs.getDate("CHECKIN_DATE").toString());
-                info.setCheckoutDate(rs.getDate("CHECKOUT_DATE").toString());
+                info.setName(rs.getString(nameCol));
+                info.setRoomType(rs.getString(roomtypeCol));
+                info.setCheckinDate(rs.getDate(checkinCol).toString());
+                info.setCheckoutDate(rs.getDate(checkoutCol).toString());
                 info.setID(rs.getInt("ID"));
                 System.out.println("reservationprogram.SQLHelper.getListOfReservation() " + rs.getInt("ID"));
                 list.add(info);

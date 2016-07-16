@@ -41,17 +41,19 @@ public class ReservationFormController implements Initializable {
     @FXML
     private void handleSubmitButtonEvent(ActionEvent event) {
         SQLHelper helper = new SQLHelper();
+
         if (edit) {
             setInfo();
-            eraseFields();
             helper.update(info);
         } else {
             info = new ReservInfo();
             setInfo();
-            eraseFields();
-            helper.insert(info);
+            if (!info.getName().isEmpty()) {
+                helper.insert(info);
+            }
 
         }
+        //eraseFields();
         Stage stage = (Stage) nameField.getScene().getWindow();
         stage.close();
     }

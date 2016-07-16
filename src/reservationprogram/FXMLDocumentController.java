@@ -30,8 +30,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleSubmitButtonAction(ActionEvent event) {
-        ReservationForm form = new ReservationForm();
-        form.showPopupWindow(null);
+        showSubmitWindow(null);
         tableHelper.setTable();
     }
 
@@ -43,10 +42,9 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleEditButtonAction(ActionEvent event) {
-        if(tableHelper.rowSelected()){
-        ReservationForm form = new ReservationForm();
-        form.showPopupWindow(tableHelper.getSelectedItem());
-        tableHelper.setTable();
+        if (tableHelper.rowSelected()) {
+            showSubmitWindow(tableHelper.getSelectedItem());
+            tableHelper.setTable();
         }
     }
 
@@ -60,6 +58,11 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         tableHelper = new DynamicTable(reservationTable);
         tableHelper.setTable();
+    }
+
+    private void showSubmitWindow(ReservInfo info) {
+        ReservationForm form = new ReservationForm();
+        form.showPopupWindow(info);
     }
 
 }
