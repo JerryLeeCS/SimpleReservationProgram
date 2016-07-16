@@ -26,7 +26,6 @@ public class ReservationProgram extends Application {
     public void start(Stage stage) throws Exception {   
         primaryStage = stage;
         primaryStage.setResizable(false);
-        //setNewStage();
         setPrimaryStage();
         primaryStage.show();
     }

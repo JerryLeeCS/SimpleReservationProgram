@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="575.0" prefWidth="394.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reservationprogram.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="407.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reservationprogram.FXMLDocumentController">
     <children>
       <Button fx:id="insertButton" layoutX="65.0" layoutY="95.0" mnemonicParsing="false" onAction="#handleSubmitButtonAction" text="Insert" />
       <Button fx:id="deleteButton" layoutX="135.0" layoutY="95.0" onAction="#handleDeleteButtonAction" text="Delete" />
