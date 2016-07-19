@@ -71,33 +71,47 @@ public class DynamicTable {
     private TableColumn<ReservInfo, String> getNameCol() {
         TableColumn<ReservInfo, String> nameCol = new TableColumn<>("Name");
         nameCol.setCellValueFactory(new PropertyValueFactory("Name"));
-        System.out.println("returned NameCol");
         return nameCol;
+    }
+    
+    private TableColumn<ReservInfo, String> getContactInfo(){
+        TableColumn<ReservInfo, String> contactInfoCol = new TableColumn<>("Contact Info");
+        contactInfoCol.setCellValueFactory(new PropertyValueFactory<>("contactInfo"));
+        return contactInfoCol;
     }
 
     private TableColumn<ReservInfo, String> getRoomTypeCol() {
         TableColumn<ReservInfo, String> roomTypeCol = new TableColumn<>("Room Type");
-        roomTypeCol.setCellValueFactory(new PropertyValueFactory("RoomType"));
-        System.out.println("returned RoomTypeCol");
+        roomTypeCol.setCellValueFactory(new PropertyValueFactory("roomType"));
         return roomTypeCol;
+    }
+    
+    private TableColumn<ReservInfo, String> getNumberOfPeopleCol(){
+        TableColumn<ReservInfo, String> numberOfPeopleCol = new TableColumn<>("Number of People");
+        numberOfPeopleCol.setCellValueFactory(new PropertyValueFactory<>("numberOfPeople"));
+        return numberOfPeopleCol;
     }
 
     private TableColumn<ReservInfo, String> getCheckinDateCol() {
         TableColumn<ReservInfo, String> checkinDateCol = new TableColumn<>("Checkin Date");
         checkinDateCol.setCellValueFactory(new PropertyValueFactory("checkinDate"));
-        System.out.println("returned CheckinDateCol");
         return checkinDateCol;
     }
 
     private TableColumn<ReservInfo, String> getCheckoutDateCol() {
         TableColumn<ReservInfo, String> checkoutDateCol = new TableColumn<>("Checkout Date");
         checkoutDateCol.setCellValueFactory(new PropertyValueFactory("checkoutDate"));
-        System.out.println("returned CheckoutDateCol");
         return checkoutDateCol;
+    }
+    
+    private TableColumn<ReservInfo, String> getRoomPriceCol(){
+        TableColumn<ReservInfo, String> roomPriceCol = new TableColumn<>("Room Price");
+        roomPriceCol.setCellValueFactory(new PropertyValueFactory<>("roomPrice"));
+        return roomPriceCol;
     }
 
     public void setTable() {
-        reservationTable.getColumns().setAll(getNameCol(), getRoomTypeCol(), getCheckinDateCol(), getCheckoutDateCol());
+        reservationTable.getColumns().setAll(getNameCol(),getContactInfo() , getRoomTypeCol(),getNumberOfPeopleCol() ,getCheckinDateCol(), getCheckoutDateCol(), getRoomPriceCol());
         reservationTable.setItems(getData());
     }
 

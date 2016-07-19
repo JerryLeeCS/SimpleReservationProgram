@@ -28,11 +28,17 @@ public class ReservationFormController implements Initializable {
     @FXML
     private TextField nameField;
     @FXML
+    private TextField contactInfoField;
+    @FXML
     private TextField roomTypeField;
+    @FXML
+    private TextField numberOfPeopleField;
     @FXML
     private DatePicker checkinField;
     @FXML
     private DatePicker checkoutField;
+    @FXML
+    private TextField roomPriceField;
 
     private boolean edit = false;
 
@@ -60,9 +66,12 @@ public class ReservationFormController implements Initializable {
 
     private void setInfo() {
         info.setName(nameField.getText());
+        info.setContactInfo(contactInfoField.getText());
         info.setRoomType(roomTypeField.getText());
+        info.setNumberOfPeople(numberOfPeopleField.getText());
         info.setCheckinDate(checkinField.getEditor().getText());
         info.setCheckoutDate(checkoutField.getEditor().getText());
+        info.setRoomPrice(roomPriceField.getText());
     }
 
     private void eraseFields() {
@@ -73,11 +82,14 @@ public class ReservationFormController implements Initializable {
 
     }
 
-    public void setForm(ReservInfo info) {//DATEPICKER has problems with the info's format of dates
+    public void setForm(ReservInfo info) {
         nameField.setText(info.getName());
+        contactInfoField.setText(info.getContactInfo());
         roomTypeField.setText(info.getRoomType());
+        numberOfPeopleField.setText(info.getNumberOfPeople());
         checkinField.getEditor().setText(info.getCheckinDate());
         checkoutField.getEditor().setText(info.getCheckoutDate());
+        roomPriceField.setText(info.getRoomPrice());
         edit = true;
         this.info = info;
     }

@@ -5,9 +5,7 @@
  */
 package reservationprogram;
 
-import java.sql.Date;
 import javafx.beans.property.*;
-import javafx.beans.property.adapter.JavaBeanObjectProperty;
 
 /**
  *
@@ -16,16 +14,27 @@ import javafx.beans.property.adapter.JavaBeanObjectProperty;
 public class ReservInfo {
 
     private StringProperty Name;
-    private StringProperty RoomType;
+    private StringProperty contactInfo;
+    private StringProperty roomType;
+    private StringProperty numberOfPeople;
     private StringProperty checkinDate;
     private StringProperty checkoutDate;
+    private StringProperty roomPrice;
     private int ID;
     public void setName(String value) {
         nameProperty().set(value);
     }
+    
+    public void setContactInfo(String value){
+        contactInfoProperty().set(value);
+    }
 
     public void setRoomType(String value) {
         roomTypeProperty().set(value);
+    }
+    
+    public void setNumberOfPeople(String value){
+        numberOfPeopleProperty().set(value);
     }
 
     public void setCheckinDate(String value) {
@@ -36,6 +45,10 @@ public class ReservInfo {
         checkoutDateProperty().set(value);
     }
     
+    public void setRoomPrice(String value){
+        roomPriceProperty().set(value);
+    }
+    
     public void setID(int ID){
         this.ID = ID;
     }
@@ -43,9 +56,17 @@ public class ReservInfo {
     public String getName() {
         return nameProperty().get();
     }
+    
+    public String getContactInfo(){
+        return contactInfoProperty().get();
+    }
 
     public String getRoomType() {
         return roomTypeProperty().get();
+    }
+    
+    public String getNumberOfPeople(){
+        return numberOfPeopleProperty().get();
     }
 
     public String getCheckinDate() {
@@ -56,6 +77,9 @@ public class ReservInfo {
         return checkoutDateProperty().get();
     }
     
+    public String getRoomPrice(){
+        return roomPriceProperty().get();
+    }
     
     public String getID(){
         return Integer.toString(ID);
@@ -67,12 +91,26 @@ public class ReservInfo {
         }
         return Name;
     }
+    
+    public StringProperty contactInfoProperty(){
+        if(contactInfo == null){
+            contactInfo = new SimpleStringProperty(this, "contactInfo");
+        }
+        return contactInfo;
+    }
 
     public StringProperty roomTypeProperty() {
-        if (RoomType == null) {
-            RoomType = new SimpleStringProperty(this, "RoomType");
+        if (roomType == null) {
+            roomType = new SimpleStringProperty(this, "roomType");
         }
-        return RoomType;
+        return roomType;
+    }
+    
+    public StringProperty numberOfPeopleProperty(){
+        if(numberOfPeople == null){
+            numberOfPeople = new SimpleStringProperty(this, "numOfPeople");
+        }
+        return numberOfPeople;
     }
 
     public StringProperty checkinDateProperty() {
@@ -87,5 +125,12 @@ public class ReservInfo {
             checkoutDate = new SimpleStringProperty(this, "checkoutDate");
         }
         return checkoutDate;
+    }
+    
+    public StringProperty roomPriceProperty(){
+        if(roomPrice == null){
+            roomPrice = new SimpleStringProperty(this, "roomPrice");
+        }
+        return roomPrice;
     }
 }

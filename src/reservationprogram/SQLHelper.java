@@ -23,28 +23,35 @@ public class SQLHelper {
     private static final String user = "administrator";
     private static final String pass = "1234";
     private static final String nameCol = "NAME";
+    private static final String contactInfoCol = "CONTACT_INFO";
     private static final String roomtypeCol = "ROOM_TYPE";
+    private static final String numberOfPeopleCol = "NUMBER_OF_PEOPLE";
     private static final String checkinCol = "CHECKIN_DATE";
     private static final String checkoutCol = "CHECKOUT_DATE";
+    private static final String roomPriceCol = "ROOM_PRICE";
 
     public SQLHelper() {
         createTable();
+
     }
 
     public void insert(ReservInfo info) {
         PreparedStatement stmt = null;
         getConnection();
         try {
-            String query = "INSERT INTO " + dbName + "( "+nameCol+ ", " + roomtypeCol + ", " + checkinCol + ", " + checkoutCol + ")"
-                    + " VALUES (?,?,?,?)";
+            String query = "INSERT INTO " + dbName + "( "+nameCol+ ", " + contactInfoCol  + ", "+ roomtypeCol + ", " + numberOfPeopleCol + ", "+ checkinCol + ", " + checkoutCol + ", " + roomPriceCol +")"
+                    + " VALUES (?,?,?,?,?,?,?)";
             stmt = connection.prepareStatement(query);
 
             stmt.setString(1, info.getName());
-            stmt.setString(2, info.getRoomType());
-            stmt.setString(3, info.getCheckinDate());
-            stmt.setString(4, info.getCheckoutDate());
+            stmt.setString(2, info.getContactInfo());
+            stmt.setString(3, info.getRoomType());
+            stmt.setString(4, info.getNumberOfPeople());
+            stmt.setString(5, info.getCheckinDate());
+            stmt.setString(6, info.getCheckoutDate());
+            stmt.setString(7, info.getRoomPrice());
 
-            System.err.println("Info inserted: " + info.getName() + " " + info.getRoomType() + " " + info.getCheckinDate() + " " + info.getCheckoutDate());
+            System.out.println("Info inserted: " + info.getName() + " " + info.getRoomType() + " " + info.getCheckinDate() + " " + info.getCheckoutDate());
 
             stmt.executeUpdate();
             stmt.close();
@@ -58,16 +65,19 @@ public class SQLHelper {
         PreparedStatement stmt = null;
         getConnection();
         String query = "UPDATE " + dbName
-                + " SET " + nameCol +" = ?, " + roomtypeCol + " = ?, " + checkinCol + " = ?, " + checkoutCol + " = ? "
+                + " SET " + nameCol +" = ?, " + contactInfoCol + " = ?, " + roomtypeCol + " = ?, "+ numberOfPeopleCol +" = ?, " + checkinCol + " = ?, " + checkoutCol + " = ?, " + roomPriceCol + " = ? "
                 + "WHERE ID = ?";
         try {
             stmt = connection.prepareStatement(query);
             
             stmt.setString(1, newInfo.getName());
-            stmt.setString(2, newInfo.getRoomType());
-            stmt.setString(3, newInfo.getCheckinDate());
-            stmt.setString(4,newInfo.getCheckoutDate());
-            stmt.setString(5, newInfo.getID());
+            stmt.setString(2, newInfo.getContactInfo());
+            stmt.setString(3, newInfo.getRoomType());
+            stmt.setString(4, newInfo.getNumberOfPeople());
+            stmt.setString(5, newInfo.getCheckinDate());
+            stmt.setString(6,newInfo.getCheckoutDate());
+            stmt.setString(7, newInfo.getRoomPrice());
+            stmt.setString(8, newInfo.getID());
             
             System.out.println("Update newInfo: " + newInfo.getName());
             
@@ -98,7 +108,7 @@ public class SQLHelper {
         }
     }
 
-    public List<ReservInfo> getListOfReservation() throws SQLException {
+    public List<ReservInfo> getListOfReservation() throws SQLException {//NEED WORK ON
         getConnection();
         Statement stmt = null;
         String query = "SELECT * FROM " + dbName + " ORDER BY CHECKIN_DATE";
@@ -109,9 +119,12 @@ public class SQLHelper {
             while (rs.next()) {
                 ReservInfo info = new ReservInfo();
                 info.setName(rs.getString(nameCol));
+                info.setContactInfo(rs.getString(contactInfoCol));
                 info.setRoomType(rs.getString(roomtypeCol));
+                info.setNumberOfPeople(rs.getString(numberOfPeopleCol));
                 info.setCheckinDate(rs.getDate(checkinCol).toString());
                 info.setCheckoutDate(rs.getDate(checkoutCol).toString());
+                info.setRoomPrice(rs.getString(roomPriceCol));
                 info.setID(rs.getInt("ID"));
                 System.out.println("reservationprogram.SQLHelper.getListOfReservation() " + rs.getInt("ID"));
                 list.add(info);
@@ -130,8 +143,8 @@ public class SQLHelper {
 
     private void createTable() {//MAKING
         getConnection();
-        String createTable = "CREATE TABLE RESERVATION_TB (ID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (INCREMENT BY 1),NAME VARCHAR(30),"
-                + "ROOM_TYPE VARCHAR(15), CHECKIN_DATE DATE, CHECKOUT_DATE DATE, PRIMARY KEY (ID))";
+        String createTable = "CREATE TABLE RESERVATION_TB (ID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (INCREMENT BY 1), NAME VARCHAR(30), CONTACT_INFO VARCHAR(50),"
+                + "ROOM_TYPE VARCHAR(15), NUMBER_OF_PEOPLE VARCHAR(12) , CHECKIN_DATE DATE, CHECKOUT_DATE DATE, ROOM_PRICE VARCHAR(12) , PRIMARY KEY (ID))";
 
         try {
             Statement statment = connection.createStatement();
