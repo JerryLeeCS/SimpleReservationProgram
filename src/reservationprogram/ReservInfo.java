@@ -20,20 +20,21 @@ public class ReservInfo {
     private StringProperty checkinDate;
     private StringProperty checkoutDate;
     private StringProperty roomPrice;
-    private int ID;
+    private int ID = -1;
+
     public void setName(String value) {
         nameProperty().set(value);
     }
-    
-    public void setContactInfo(String value){
+
+    public void setContactInfo(String value) {
         contactInfoProperty().set(value);
     }
 
     public void setRoomType(String value) {
         roomTypeProperty().set(value);
     }
-    
-    public void setNumberOfPeople(String value){
+
+    public void setNumberOfPeople(String value) {
         numberOfPeopleProperty().set(value);
     }
 
@@ -44,28 +45,28 @@ public class ReservInfo {
     public void setCheckoutDate(String value) {
         checkoutDateProperty().set(value);
     }
-    
-    public void setRoomPrice(String value){
+
+    public void setRoomPrice(String value) {
         roomPriceProperty().set(value);
     }
-    
-    public void setID(int ID){
+
+    public void setID(int ID) {
         this.ID = ID;
     }
 
     public String getName() {
         return nameProperty().get();
     }
-    
-    public String getContactInfo(){
+
+    public String getContactInfo() {
         return contactInfoProperty().get();
     }
 
     public String getRoomType() {
         return roomTypeProperty().get();
     }
-    
-    public String getNumberOfPeople(){
+
+    public String getNumberOfPeople() {
         return numberOfPeopleProperty().get();
     }
 
@@ -76,12 +77,15 @@ public class ReservInfo {
     public String getCheckoutDate() {
         return checkoutDateProperty().get();
     }
-    
-    public String getRoomPrice(){
+
+    public String getRoomPrice() {
         return roomPriceProperty().get();
     }
-    
-    public String getID(){
+
+    public String getID() {
+        if (ID == -1) {
+            return "";
+        }
         return Integer.toString(ID);
     }
 
@@ -91,9 +95,9 @@ public class ReservInfo {
         }
         return Name;
     }
-    
-    public StringProperty contactInfoProperty(){
-        if(contactInfo == null){
+
+    public StringProperty contactInfoProperty() {
+        if (contactInfo == null) {
             contactInfo = new SimpleStringProperty(this, "contactInfo");
         }
         return contactInfo;
@@ -105,9 +109,9 @@ public class ReservInfo {
         }
         return roomType;
     }
-    
-    public StringProperty numberOfPeopleProperty(){
-        if(numberOfPeople == null){
+
+    public StringProperty numberOfPeopleProperty() {
+        if (numberOfPeople == null) {
             numberOfPeople = new SimpleStringProperty(this, "numOfPeople");
         }
         return numberOfPeople;
@@ -126,9 +130,9 @@ public class ReservInfo {
         }
         return checkoutDate;
     }
-    
-    public StringProperty roomPriceProperty(){
-        if(roomPrice == null){
+
+    public StringProperty roomPriceProperty() {
+        if (roomPrice == null) {
             roomPrice = new SimpleStringProperty(this, "roomPrice");
         }
         return roomPrice;
