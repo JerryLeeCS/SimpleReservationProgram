@@ -7,14 +7,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="575.0" prefWidth="955.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reservationprogram.FXMLDocumentController">
-    <children>
-      <Button fx:id="insertButton" layoutX="33.0" layoutY="95.0" mnemonicParsing="false" onAction="#handleSubmitButtonAction" text="Insert" />
-      <Button fx:id="deleteButton" layoutX="113.0" layoutY="95.0" onAction="#handleDeleteButtonAction" text="Delete" />
-      <Button layoutX="190.0" layoutY="95.0" mnemonicParsing="false" onAction="#handleEditButtonAction" prefHeight="25.0" prefWidth="46.0" text="Edit" />
-      <Button fx:id="refreshButton" layoutX="265.0" layoutY="95.0" mnemonicParsing="false" onAction="#handleRefreshButtonAction" text="Refresh" />
-      <TableView fx:id="reservationTable" layoutY="120.0" prefHeight="455.0" prefWidth="955.0">
+<VBox prefHeight="553.0" prefWidth="955.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reservationprogram.FXMLDocumentController">
+   <children>
+      <HBox alignment="CENTER">
+         <children>
+            <Button fx:id="insertButton" mnemonicParsing="false" onAction="#handleSubmitButtonAction" text="Insert" />
+            <Button mnemonicParsing="false" onAction="#handleEditButtonAction" prefHeight="25.0" prefWidth="46.0" text="Edit" />
+            <Button fx:id="deleteButton" onAction="#handleDeleteButtonAction" text="Delete" />
+            <Button fx:id="refreshButton" mnemonicParsing="false" onAction="#handleRefreshButtonAction" text="Refresh" />
+         </children>
+      </HBox>
+      <TableView fx:id="reservationTable" prefHeight="654.0" prefWidth="955.0">
 
       </TableView>
-    </children>
-</AnchorPane>
+   </children>
+</VBox>

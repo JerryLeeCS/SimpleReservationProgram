@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
@@ -8,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane prefHeight="319.0" prefWidth="308.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reservationprogram.ReservationFormController">
+<GridPane prefHeight="319.0" prefWidth="308.0" style="-fx-background-color: #f2f2f2;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reservationprogram.ReservationFormController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="143.0" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="87.0" />
@@ -25,7 +26,7 @@
     </rowConstraints>
     <children>
         
-        <Label text="Name: ">
+        <Label text="Name: " textAlignment="CENTER">
             <font>
                 <Font name="System Bold" size="16.0" />
             </font>
@@ -40,7 +41,7 @@
                 <Font name="System Bold" size="16.0" />
             </font>
         </Label>
-        <Label text="Number  of People: " GridPane.rowIndex="3">
+        <Label text="Number of People: " GridPane.rowIndex="3">
             <font>
                 <Font name="System Bold" size="16.0" />
             </font>

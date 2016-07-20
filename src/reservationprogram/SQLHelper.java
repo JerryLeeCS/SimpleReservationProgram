@@ -29,6 +29,7 @@ public class SQLHelper {
     private static final String checkinCol = "CHECKIN_DATE";
     private static final String checkoutCol = "CHECKOUT_DATE";
     private static final String roomPriceCol = "ROOM_PRICE";
+    private static final String idCol = "ID";
 
     public SQLHelper() {
         createTable();
@@ -39,7 +40,7 @@ public class SQLHelper {
         PreparedStatement stmt = null;
         getConnection();
         try {
-            String query = "INSERT INTO " + dbName + "( "+nameCol+ ", " + contactInfoCol  + ", "+ roomtypeCol + ", " + numberOfPeopleCol + ", "+ checkinCol + ", " + checkoutCol + ", " + roomPriceCol +")"
+            String query = "INSERT INTO " + dbName + "( " + nameCol + ", " + contactInfoCol + ", " + roomtypeCol + ", " + numberOfPeopleCol + ", " + checkinCol + ", " + checkoutCol + ", " + roomPriceCol + ")"
                     + " VALUES (?,?,?,?,?,?,?)";
             stmt = connection.prepareStatement(query);
 
@@ -50,8 +51,6 @@ public class SQLHelper {
             stmt.setString(5, info.getCheckinDate());
             stmt.setString(6, info.getCheckoutDate());
             stmt.setString(7, info.getRoomPrice());
-
-            System.out.println("Info inserted: " + info.getName() + " " + info.getRoomType() + " " + info.getCheckinDate() + " " + info.getCheckoutDate());
 
             stmt.executeUpdate();
             stmt.close();
@@ -65,22 +64,20 @@ public class SQLHelper {
         PreparedStatement stmt = null;
         getConnection();
         String query = "UPDATE " + dbName
-                + " SET " + nameCol +" = ?, " + contactInfoCol + " = ?, " + roomtypeCol + " = ?, "+ numberOfPeopleCol +" = ?, " + checkinCol + " = ?, " + checkoutCol + " = ?, " + roomPriceCol + " = ? "
-                + "WHERE ID = ?";
+                + " SET " + nameCol + " = ?, " + contactInfoCol + " = ?, " + roomtypeCol + " = ?, " + numberOfPeopleCol + " = ?, " + checkinCol + " = ?, " + checkoutCol + " = ?, " + roomPriceCol + " = ? "
+                + "WHERE " + idCol + " = ?";
         try {
             stmt = connection.prepareStatement(query);
-            
+
             stmt.setString(1, newInfo.getName());
             stmt.setString(2, newInfo.getContactInfo());
             stmt.setString(3, newInfo.getRoomType());
             stmt.setString(4, newInfo.getNumberOfPeople());
             stmt.setString(5, newInfo.getCheckinDate());
-            stmt.setString(6,newInfo.getCheckoutDate());
+            stmt.setString(6, newInfo.getCheckoutDate());
             stmt.setString(7, newInfo.getRoomPrice());
             stmt.setString(8, newInfo.getID());
-            
-            System.out.println("Update newInfo: " + newInfo.getName());
-            
+
             stmt.executeUpdate();
             stmt.close();
             connection.close();
@@ -94,7 +91,7 @@ public class SQLHelper {
             getConnection();
             Statement stmt = null;
             String deleteQuery = "DELETE FROM " + dbName
-                    + " WHERE ID = " + info.getID();
+                    + " WHERE " + idCol + " = " + info.getID();
             try {
                 stmt = connection.createStatement();
                 stmt.executeUpdate(deleteQuery);
@@ -111,7 +108,7 @@ public class SQLHelper {
     public List<ReservInfo> getListOfReservation() throws SQLException {//NEED WORK ON
         getConnection();
         Statement stmt = null;
-        String query = "SELECT * FROM " + dbName + " ORDER BY CHECKIN_DATE";
+        String query = "SELECT * FROM " + dbName + " ORDER BY " + checkinCol;
         List<ReservInfo> list = new ArrayList<>();
         try {
             stmt = connection.createStatement();
@@ -125,8 +122,7 @@ public class SQLHelper {
                 info.setCheckinDate(rs.getDate(checkinCol).toString());
                 info.setCheckoutDate(rs.getDate(checkoutCol).toString());
                 info.setRoomPrice(rs.getString(roomPriceCol));
-                info.setID(rs.getInt("ID"));
-                System.out.println("reservationprogram.SQLHelper.getListOfReservation() " + rs.getInt("ID"));
+                info.setID(rs.getInt(idCol));
                 list.add(info);
             }
 
@@ -143,9 +139,16 @@ public class SQLHelper {
 
     private void createTable() {//MAKING
         getConnection();
-        String createTable = "CREATE TABLE RESERVATION_TB (ID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (INCREMENT BY 1), NAME VARCHAR(30), CONTACT_INFO VARCHAR(50),"
-                + "ROOM_TYPE VARCHAR(15), NUMBER_OF_PEOPLE VARCHAR(12) , CHECKIN_DATE DATE, CHECKOUT_DATE DATE, ROOM_PRICE VARCHAR(12) , PRIMARY KEY (ID))";
-
+        String createTable = "CREATE TABLE RESERVATION_TB  "
+                + "( " + idCol + " INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (INCREMENT BY 1), "
+                + nameCol + " VARCHAR(30), "
+                + contactInfoCol + " VARCHAR(50), "
+                + roomtypeCol + " VARCHAR(15), "
+                + numberOfPeopleCol + " VARCHAR(12), "
+                + checkinCol + " DATE, "
+                + checkoutCol + " DATE, "
+                + roomPriceCol + " VARCHAR(12), "
+                + "PRIMARY KEY (" + idCol +"))";
         try {
             Statement statment = connection.createStatement();
             DatabaseMetaData dmd = connection.getMetaData();

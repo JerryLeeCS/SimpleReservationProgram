@@ -33,6 +33,7 @@ public class DynamicTable {
     public DynamicTable(TableView<ReservInfo> reservationTable) {
         this.reservationTable = reservationTable;
         this.reservationTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        this.reservationTable.setEditable(false);
     }
 
     private ObservableList<ReservInfo> getData() {
