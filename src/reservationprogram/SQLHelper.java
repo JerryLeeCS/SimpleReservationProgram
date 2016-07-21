@@ -64,7 +64,7 @@ public class SQLHelper {
         deleteDataBeforeToday();
         getConnection();
         Statement stmt = null;
-        String query = "SELECT * FROM " + dbName + " ORDER BY " + checkinCol;
+        String query = "SELECT * FROM " + dbName + " ORDER BY " + checkinCol + " , " + nameCol;
         
         List<ReservInfo> list = new ArrayList<>();
         try {

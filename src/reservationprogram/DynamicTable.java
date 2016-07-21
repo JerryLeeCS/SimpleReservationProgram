@@ -44,8 +44,6 @@ public class DynamicTable {
             ListIterator li = list.listIterator();
             while (li.hasNext()) {
                 ReservInfo info = (ReservInfo) li.next();
-
-                System.out.println("Row added" + info.getName() + " " + info.getRoomType() + " " + info.getCheckinDate() + " " + info.getCheckoutDate());
                 data.add(info);
             }
 
